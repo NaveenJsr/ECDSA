@@ -4,7 +4,7 @@ const App = () => {
   const [publicKeyJson, setPublicKeyJson] = useState('');
   const [privateKeyJson, setPrivateKeyJson] = useState('');
   const [cipherText, setCipherText] = useState('');
-  const [plainText, setPlainText] = useState('Hello, ECDSA!');
+  const [plainText, setPlainText] = useState("");
   const [privateKey, setPrivateKey] = useState(null);
   const [publicKey, setPublicKey] = useState(null);
 
@@ -111,14 +111,17 @@ const App = () => {
         />
       </div>
       <div>
-        <button onClick={signData}>Sign Data</button>
+        <button disabled={!plainText} onClick={signData}>Sign Data</button>
       </div>
       <div>
         <label>Cipher Text:</label>
-        <textarea readOnly value={cipherText} />
+        <textarea
+          value={cipherText}
+          onChange={(e) => setCipherText(e.target.value)}
+        />
       </div>
       <div>
-        <button onClick={verifySignature}>Verify Signature</button>
+        <button disabled={!cipherText} onClick={verifySignature}>Verify Signature</button>
       </div>
     </div>
   );
